@@ -19,6 +19,16 @@
   background-color: pink;
 }
 
+.movieTitle .ratingGood {
+  color: green;
+}
+.movieTitle .ratingSoso {
+  color: orange;;
+}
+.movieTitle .ratingBad {
+  color: red;
+}
+
 .movie .movieYear {
   font-size: 0.5rem;
   color: red;
