@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './App.css'
+import MovieList from './components/MovieList'
 
 function App() {
   const [movies, setMovies] = useState([])
@@ -12,20 +13,10 @@ function App() {
 
   console.log('movies: ', movies)
 
-  const render = movies.map((item) => {
-    return (
-      <div className='movie' key={item.id}>
-        <a className='movieTitle' href={item.url}>{item.title}</a>
-        <img className='movieImage' src={item.background_image} alt={item.title}></img>
-        <div className='movieYear'>{item.year}</div>
-      </div>
-    )
-  })
-
   return (
     <div className="App">
-      <h1>무비 리스트</h1>
-      {render}
+      <h1>영화 앱</h1>
+      <MovieList movies={movies} />
     </div>
   )
 }
