@@ -31,4 +31,3 @@ git commit -m "feat: add 1.js"
         upper-case: (예. UPPERCASE)
         
 git push origin feat/1
-
