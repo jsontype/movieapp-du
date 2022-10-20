@@ -22,9 +22,11 @@
 .movieTitle .ratingGood {
   color: green;
 }
+
 .movieTitle .ratingSoso {
-  color: orange;;
+  color: orange;
 }
+
 .movieTitle .ratingBad {
   color: red;
 }
