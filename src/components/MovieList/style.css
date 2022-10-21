@@ -12,7 +12,9 @@
 .movie .movieTitle {
   flex-grow: 1;
   text-decoration: none;
-  color: black;  
+  color: black; 
+  padding-left: 20px;
+  line-height: 112.5px;
 }
 
 .movie .movieTitle:hover {
