@@ -6,7 +6,8 @@
 }
   
 .movie .movieImage {
-  width: 200px;
+  width: auto;
+  height: 100px;
 }
 
 .movie .movieTitle {
