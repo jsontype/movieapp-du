@@ -21,7 +21,7 @@ export default function MovieList({ movies }) {
         <div className='movie' onClick={onClick}>
           <div className='movieTitle'>{item.title} {ratingIcon} &#40; 평점 : <span className={ratingClass}>{rating}</span> / 10 &#41;</div>
           <div className='movieYear'>{item.year}</div>
-          <img className='movieImage' src={item.background_image} alt={item.title}></img>
+          <img className='movieImage' src={item.medium_cover_image} alt={item.title}></img>
         </div>
         {isDetail && id === item.id && <RenderDetail item={item} />}
       </div>
