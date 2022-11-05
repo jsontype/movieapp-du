@@ -2,8 +2,19 @@ import React, { useState } from 'react'
 import './style.css'
 import RenderDetail from './MovieDetail'
   
+type ItemProps = {
+  id: number,
+  medium_cover_image: string,
+  year: number,
+  title: string,
+  runtime: string,
+  genres: string[],
+  rating: number,
+  summary: string,    
+}
+
 type MovieListProps = {
-  movies: any[]
+  movies: ItemProps[]
 }
 
 export default function MovieList({ movies }: MovieListProps) {

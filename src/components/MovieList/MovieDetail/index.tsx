@@ -1,7 +1,15 @@
 import React from 'react'
 
+type ItemProps = {
+    title: string,
+    runtime: string,
+    genres: string[],
+    rating: number,
+    summary: string,    
+}
+
 type MovieDetailProps = {
-    item: any,
+    item: ItemProps
 }
 
 export default function MovieDetail ({ item }: MovieDetailProps) {
