@@ -2,7 +2,11 @@ import React, { useState } from 'react'
 import './style.css'
 import RenderDetail from './MovieDetail'
   
-export default function MovieList({ movies }) {
+type MovieListProps = {
+  movies: any[]
+}
+
+export default function MovieList({ movies }: MovieListProps) {
   const [isDetail, setIsDetail] = useState(false)
   const [id, setId] = useState(0)
 

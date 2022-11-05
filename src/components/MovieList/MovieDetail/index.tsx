@@ -1,6 +1,10 @@
 import React from 'react'
 
-export default function MovieDetail ({ item }) {
+type MovieDetailProps = {
+    item: any,
+}
+
+export default function MovieDetail ({ item }: MovieDetailProps) {
     return (
         <>
             <div>영화제목 : {item.title}</div>
