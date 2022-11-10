@@ -1,6 +1,9 @@
+@import '../.././style/resources.scss';
+
+
 .movie {
   display: flex;
-  border: 1px solid gray;
+  border: 1px solid $Gray;
   border-radius: 5px;
   padding: 5px;
 }
@@ -13,29 +16,29 @@
 .movie .movieTitle {
   flex-grow: 1;
   text-decoration: none;
-  color: black; 
+  color: $Black; 
   padding-left: 20px;
   line-height: 112.5px;
 }
 
 .movie .movieTitle:hover {
-  background-color: gray;
+  background-color: $Gray;
 }
 
 .movieTitle .ratingGood {
-  color: green;
+  color: $Green;
 }
 
 .movieTitle .ratingSoso {
-  color: orange;
+  color: $Orange;
 }
 
 .movieTitle .ratingBad {
-  color: red;
+  color: $Red;
 }
 
 .movie .movieYear {
   font-size: 0.5rem;
-  color: red;
+  color: $Red;
   margin-right: 10px;
 }

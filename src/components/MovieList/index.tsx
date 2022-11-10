@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import './style.css'
+import './style.scss'
 import RenderDetail from './MovieDetail'
   
 type ItemProps = {
