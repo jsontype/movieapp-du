@@ -1,51 +1,39 @@
 import React, { useState } from 'react'
-import './style.scss'
-import RenderDetail from './MovieDetail'
-  
-type ItemProps = {
-  id: number,
-  medium_cover_image: string,
-  year: number,
-  title: string,
-  runtime: string,
-  genres: string[],
-  rating: number,
-  summary: string,    
-}
+import MovieDetail from './MovieDetail'
+import styles from './style.module.scss'
 
 type MovieListProps = {
-  movies: ItemProps[]
+    movies: any[]
 }
 
 export default function MovieList({ movies }: MovieListProps) {
-  const [isDetail, setIsDetail] = useState(false)
-  const [id, setId] = useState(0)
+    const [isDetail, setIsDetail] = useState<boolean>(false)
+    const [id, setId] = useState<number>(0)
 
-  const render = movies.map((item) => {
-    const ratingClass = item.rating >= 9 ? "ratingGood" : item.rating >= 7 ? "ratingSoso" : "ratingBad"
-    const ratingIcon = item.rating >= 9 && "🔥"
-    const rating = item.rating || "평가없음"
+    const render = movies.map(item => {
+        const onClick = () => {
+            isDetail && id !== item.id ? setIsDetail(true) : setIsDetail(!isDetail)
+            setId(item.id)
+        }
 
-    const onClick = () => {
-      isDetail && id !== item.id ? setIsDetail(true) : setIsDetail(!isDetail)
-      setId(item.id)
-    }
-    
-    return (
-      <div key={item.id}>
-        <div className='movie' onClick={onClick}>
-          <h1 className='movieTitle'>{item.title} {ratingIcon} &#40; 평점 : <span className={ratingClass}>{rating}</span> / 10 &#41;</h1>
-          <div className='movieYear'>{item.year}</div>
-          <img className='movieImage' src={item.medium_cover_image} alt={item.title}></img>
+        console.log(isDetail)
+
+      return (
+        <div key={item.id}>
+          <div className={styles.movieTitle} onClick={onClick}>
+            {item.title}
+            <br/><a href={item.url}>바로가기</a>
+          </div>
+  
+          { isDetail && item.id === id && <MovieDetail item={item} /> }
+          <img src={item.large_cover_image} alt={item.title} /> 
         </div>
-        {isDetail && id === item.id && <RenderDetail item={item} />}
-      </div>
-    )
-  })
+      )
+    })
 
-  return (
-    <>
-      {render}
-    </>
-  )
+    return (
+        <>
+            {render}
+        </>
+    )
 }

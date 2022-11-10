@@ -1,9 +1,10 @@
-@import './style/resources.scss';
+@import './styles/resources.scss';
+
 .App {
-  padding: 20px;
+  margin-top: 20px;
 }
 
-h1 {
-  font-size: $font-xl;
-  
+.title {
+  background-color: red;
+  font-size: 50px;
 }

@@ -1,0 +1,22 @@
+@import '../../../styles/resources.scss';
+
+.movieRankGood {
+    color: $color-blue;
+}
+
+.movieRankSoso {
+    color: $color-orange;
+}
+
+.movieRankBad {
+    color: $color-red;
+}
+
+.torrent {
+    display: $color-black;
+    color: $color-gray;
+}
+
+.movieDetail {
+    @include border-box(true, 0);
+}
