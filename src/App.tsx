@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react'
-
-import AppTitle from './components/AppTitle'
+import './components/TodosList/style.module.scss'
+// import AppTitle from './components/AppTitle'
 import MovieList from './components/MovieList'
 import NewsList from './components/NewsList'
-
-import './App.scss'
+import TodosList from './components/TodosList'
+// import './App.scss'
 
 function App() {
   // JS
-  const [viewList, setViewList] = useState(true)
+  // const [viewList, setViewList] = useState(true)
+  const [mode, setMode] = useState("movies")
 
   const [movies, setMovies] = useState([])
   const [news, setNews] = useState([])
@@ -27,18 +28,39 @@ function App() {
     .then(response => response.json())
     .then(json => setNews(json))
   }, [url])
+
+  let content = null;
+  if(mode === "movies"){
+    content = <MovieList movies={movies} />
+  }else if(mode === "news"){
+    content = <NewsList news={news} />
+  }else if(mode === "todo"){
+    content = <TodosList></TodosList>
+  }
   // XML
   return (
     <>
+
       <div>
-        <button onClick={ () => setViewList(!viewList)}>ChangeApp</button>
+        {/* <button onClick={ () => setViewList(!viewList)}>ChangeApp</button> */}
+        <button onClick={ () => 
+          setMode("movies")
+        }>무비</button>
+        <button onClick={ () => 
+          setMode("news")
+        }>뉴스</button>
+        <button onClick={ () => 
+          setMode("todo")
+        }>투두</button>
       </div>
-      <div className="App">
+      {content}
+      {/* <div className="App">
         <AppTitle name={viewList ? 'movie' : 'news'}/>
         {
         viewList? <MovieList movies={movies} /> : <NewsList news={news} />
         }
       </div>
+      <TodosList></TodosList> */}
     </>
   )
 }
