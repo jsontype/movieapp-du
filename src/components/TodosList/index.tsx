@@ -1,21 +1,39 @@
-import '../../App.scss'
-import React, { useState } from 'react'
+import styles from "./style.module.scss";
+import React, { useState } from "react";
 
+type TodoProps = {
+  id: number;
+  title: string;
+  completed: boolean;
+};
 
+type TodosListProps = {
+  todos: TodoProps[];
+  onCreate: (text: string) => void;
+  onCompleted: (id: number) => void;
+  onDelete: (id: number) => void;
+};
 
-export default function TodosList({todos,onCreate,onDelete,onCompleted}:any) {
+export default function TodosList({
+  todos,
+  onCreate,
+  onDelete,
+  onCompleted,
+}: TodosListProps) {
   // JS
-    const [text, setText] = useState('')
+  const [text, setText] = useState("");
 
-
-
+  const onSubmit = (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    onCreate(text);
+    setText("");
+  };
 
   // 추가
 
-
   const onChange = (e: { target: { value: React.SetStateAction<string> } }) => {
-    setText(e.target.value)
-  }    
+    setText(e.target.value);
+  };
   const render = todos.map((item: any) => {
     // 삭제
 
@@ -23,12 +41,15 @@ export default function TodosList({todos,onCreate,onDelete,onCompleted}:any) {
 
     const titleClass = item.completed ? "checked" : "unchecked";
     return (
-      <div className="todo" key={item.id}>
+      <div key={item.id}>
         <span>#{item.id} / </span>
-        <span className={titleClass} onClick={() => onCompleted(item.id)}>
+        <span
+          className={styles[titleClass]}
+          onClick={() => onCompleted(item.id)}
+        >
           제목: {item.title} {item.completed && "👍"}
         </span>
-        <span className="deleteBtn" onClick={() => onDelete(item.id)}>
+        <span className={styles.deleteBtn} onClick={() => onDelete(item.id)}>
           ❌
         </span>
       </div>
@@ -37,12 +58,18 @@ export default function TodosList({todos,onCreate,onDelete,onCompleted}:any) {
 
   // XML
   return (
-    <div className="App">
-      <form onSubmit={onCreate}>
-        <input name="title" type="text" onChange={onChange} value={text} required></input>
+    <div>
+      <form onSubmit={onSubmit}>
+        <input
+          name="title"
+          type="text"
+          onChange={onChange}
+          value={text}
+          required
+        ></input>
         <button type="submit">등록</button>
       </form>
-      {render}
+      <div>{render}</div>
     </div>
-  )
+  );
 }
