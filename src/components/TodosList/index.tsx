@@ -1,5 +1,5 @@
 import styles from "./style.module.scss";
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, memo } from "react";
 
 type TodoProps = {
   id: number;
@@ -14,12 +14,12 @@ type TodosListProps = {
   onDelete: (id: number) => void;
 };
 
-export default function TodosList({
+const TodosList = ({
   todos,
   onCreate,
   onDelete,
   onCompleted,
-}: TodosListProps) {
+}: TodosListProps) => {
   // JS
   const [text, setText] = useState("");
 
@@ -78,4 +78,5 @@ export default function TodosList({
       <div>{render}</div>
     </div>
   );
-}
+};
+export default memo(TodosList);
