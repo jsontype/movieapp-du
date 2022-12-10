@@ -1,5 +1,5 @@
 import styles from "./style.module.scss";
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 
 type TodoProps = {
   id: number;
@@ -23,17 +23,23 @@ export default function TodosList({
   // JS
   const [text, setText] = useState("");
 
-  const onSubmit = (e: { preventDefault: () => void }) => {
-    e.preventDefault();
-    onCreate(text);
-    setText("");
-  };
+  const onSubmit = useCallback(
+    (e: { preventDefault: () => void }) => {
+      e.preventDefault();
+      onCreate(text);
+      setText("");
+    },
+    [text]
+  );
 
   // 추가
 
-  const onChange = (e: { target: { value: React.SetStateAction<string> } }) => {
-    setText(e.target.value);
-  };
+  const onChange = useCallback(
+    (e: { target: { value: React.SetStateAction<string> } }) => {
+      setText(e.target.value);
+    },
+    [setText]
+  );
   const render = todos.map((item: any) => {
     // 삭제
 
