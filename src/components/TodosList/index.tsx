@@ -1,56 +1,82 @@
-import '../../App.scss'
-import React, { useState, useEffect, useRef } from 'react'
-import TodoDetail from './TodosDeatail'
+import styles from "./style.module.scss";
+import React, { useState, useCallback, memo } from "react";
 
-interface Todos{
-  completed:boolean
-  id:number
-  title:string
-  userId:number
-}
+type TodoProps = {
+  id: number;
+  title: string;
+  completed: boolean;
+};
 
+type TodosListProps = {
+  todos: TodoProps[];
+  onCreate: (text: string) => void;
+  onCompleted: (id: number) => void;
+  onDelete: (id: number) => void;
+};
 
-export default function TodosList() {
+const TodosList = ({
+  todos,
+  onCreate,
+  onDelete,
+  onCompleted,
+}: TodosListProps) => {
   // JS
-    const [todos, setTodos] = useState<Todos[]>([])
-    const [text, setText] = useState('')
+  const [text, setText] = useState("");
 
-  useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/todos')
-      .then((res) => { return res.json() })
-      .then((json) => {
-        const result = json.filter((item:any) => { return item.userId === 1 })
-        setTodos(result)
-      })
-  }, [])
-
-  const nextId = useRef(21) // todos.length + 1 왜 안 되지?
+  const onSubmit = useCallback(
+    (e: { preventDefault: () => void }) => {
+      e.preventDefault();
+      onCreate(text);
+      setText("");
+    },
+    [text]
+  );
 
   // 추가
-  const onCreate = (e: { preventDefault: () => void }) => {
-    e.preventDefault() // form의 리다이렉팅을 방지
-    setTodos([...todos, {
-      completed: false,
-      id: nextId.current,
-      title: text,
-      userId: 1,
-    }])
-    nextId.current++
-  }
 
-  const onChange = (e: { target: { value: React.SetStateAction<string> } }) => {
-    setText(e.target.value)
-  }    
+  const onChange = useCallback(
+    (e: { target: { value: React.SetStateAction<string> } }) => {
+      setText(e.target.value);
+    },
+    [setText]
+  );
+  const render = todos.map((item: any) => {
+    // 삭제
 
+    // 수정
+
+    const titleClass = item.completed ? "checked" : "unchecked";
+    return (
+      <div key={item.id}>
+        <span>#{item.id} / </span>
+        <span
+          className={styles[titleClass]}
+          onClick={() => onCompleted(item.id)}
+        >
+          제목: {item.title} {item.completed && "👍"}
+        </span>
+        <span className={styles.deleteBtn} onClick={() => onDelete(item.id)}>
+          ❌
+        </span>
+      </div>
+    );
+  });
 
   // XML
   return (
-    <div className="App">
-      <form onSubmit={onCreate}>
-        <input name="title" type="text" onChange={onChange} value={text} required></input>
+    <div>
+      <form onSubmit={onSubmit}>
+        <input
+          name="title"
+          type="text"
+          onChange={onChange}
+          value={text}
+          required
+        ></input>
         <button type="submit">등록</button>
       </form>
-      <TodoDetail todos={todos} setTodos={setTodos}></TodoDetail>
+      <div>{render}</div>
     </div>
-  )
-}
+  );
+};
+export default memo(TodosList);

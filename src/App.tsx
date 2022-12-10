@@ -3,8 +3,8 @@ import "./components/TodosList/style.module.scss";
 // import AppTitle from './components/AppTitle'
 import MovieList from "./components/MovieList";
 import NewsList from "./components/NewsList";
-import TodosList from "./components/TodosList";
 import { Routes, Route, Link } from "react-router-dom";
+import TodosContainer from "./components/TodosList/container";
 // import Header from "./components/Header";
 
 // import './App.scss'
@@ -34,14 +34,6 @@ export default function App() {
       .then((json) => setNews(json));
   }, [url]);
 
-  // let content = null;
-  // if(mode === "movies"){
-  //   content = <MovieList movies={movies} />
-  // }else if(mode === "news"){
-  //   content = <NewsList news={news} />
-  // }else if(mode === "todo"){
-  //   content = <TodosList></TodosList>
-  // }
   // XML
   return (
     <div>
@@ -53,7 +45,7 @@ export default function App() {
         {/* <Route path="/" exact={true} element={<Header />} /> */}
         <Route path="/movies" element={<MovieList movies={movies} />} />
         <Route path="/news" element={<NewsList news={news} />} />
-        <Route path="/todos" element={<TodosList></TodosList>} />
+        <Route path="/todos" element={<TodosContainer />} />
       </Routes>
     </div>
   );
